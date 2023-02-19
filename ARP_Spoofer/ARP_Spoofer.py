@@ -7,11 +7,11 @@ import re
 
 def get_arguments():
     parser = argparse.ArgumentParser()
-    parser.add_argument("i", "--interface", dest="mitm_interface", help="Attacker's interface to execute Man-in-the-Middle (MITM) attack (i.e. eth0)")
-    parser.add_argument("t", "--target", dest="target_ip", help="Target's IP address (i.e. 10.1.1.15)")
-    parser.add_argument("tm", "--target-mac-address", dest="target_mac", help="Target's MAC Address (i.e. aa:bb:cc:dd:ee:ff)")
-    parser.add_argument("g", "--gateway", dest="gateway_ip", help="Gateway IP address of Target (i.e. 10.1.1.1)")
-    parser.add_argument("gm", "--gateway-mac-address", dest="gateway_mac", help="Gateway's MAC Address (i.e. ff:ee:dd:cc:bb:aa)")
+    parser.add_argument("-i", "--interface", dest="mitm_interface", help="Attacker's interface to execute Man-in-the-Middle (MITM) attack (i.e. eth0)")
+    parser.add_argument("-t", "--target", dest="target_ip", help="Target's IP address (i.e. 10.1.1.15)")
+    parser.add_argument("-tm", "--target-mac-address", dest="target_mac", help="Target's MAC Address (i.e. aa:bb:cc:dd:ee:ff)")
+    parser.add_argument("-g", "--gateway", dest="gateway_ip", help="Gateway IP address of Target (i.e. 10.1.1.1)")
+    parser.add_argument("-gm", "--gateway-mac-address", dest="gateway_mac", help="Gateway's MAC Address (i.e. ff:ee:dd:cc:bb:aa)")
     options = parser.parse_args()
     if not options.mitm_interface:
         parser.error("[-] Please specify an interface to execute the attack from, see --help for more info.")
