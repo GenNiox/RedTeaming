@@ -24,7 +24,7 @@ def get_mac(ip_address):
     broadcast = scapy.Ether(dst="ff:ff:ff:ff:ff:ff")
     arp_request_broadcast = broadcast/arp_request
     answered_list = scapy.srp(arp_request_broadcast, timeout=1, verbose=False)[0]
-    return answered_list[0][1].hwsrc
+    print(answered_list[0][1].hwsrc)
 
 def mitm_mac(mitm_interface):
     parse_mac = argparse.ArgumentParser()
