@@ -51,7 +51,7 @@ def arp_spoof_target(target_ip, gateway_ip):
 options = get_arguments()
 print("[ ] Script Started.")
 print("[+] Enabling Traffic Flow..")
-subprocess.call("echo 1 > /proc/sys/net/ipv4/ip_forward")
+subprocess.run("echo 1 > /proc/sys/net/ipv4/ip_forward")
 print("[+] Enabled Traffic Flow!")
 # print("[+] Querying for MAC Address..")
 # mitm_mac_address = mitm_mac(options.mitm_interface)
