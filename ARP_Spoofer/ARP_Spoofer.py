@@ -11,18 +11,18 @@ def get_arguments():
     parser.add_argument("-t", "--target", dest="target_ip", help="Target's IP address (i.e. 10.1.1.15)")
     parser.add_argument("-tm", "--target-mac-address", dest="target_mac", help="Target's MAC Address (i.e. aa:bb:cc:dd:ee:ff)")
     parser.add_argument("-g", "--gateway", dest="gateway_ip", help="Gateway IP address of Target (i.e. 10.1.1.1)")
-    parser.add_argument("-gm", "--gateway-mac-address", dest="gateway_mac", help="Gateway's MAC Address (i.e. ff:ee:dd:cc:bb:aa)")
+    # parser.add_argument("-gm", "--gateway-mac-address", dest="gateway_mac", help="Gateway's MAC Address (i.e. ff:ee:dd:cc:bb:aa)")
     options = parser.parse_args()
     if not options.mitm_interface:
         parser.error("[-] Please specify an interface to execute the attack from, see --help for more info.")
     if not options.target_ip:
         parser.error("[-] Please specify a target IP address, see --help for more info.")
-    if not options.targetmac:
+    if not options.target_mac:
         parser.error("[-] Please specify a target MAC Address, see --help for more info.")
     if not options.gateway_ip:
         parser.error("[-] Please specify a gateway IP address, see --help for more info.")
-    if not options.gateway_mac:
-        parser.error("[-] Please specify a gateway MAC Address, see --help for more info.")
+    # if not options.gateway_mac:
+    #     parser.error("[-] Please specify a gateway MAC Address, see --help for more info.")
     return options
 
 def mitm_mac(mitm_interface):
