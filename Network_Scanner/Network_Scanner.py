@@ -55,6 +55,6 @@ def print_result(results_list):
 # ip_to_scan = input("IP Range to scan (IP.IP.IP.IP/SM): ")
 
 
-options = get_arguments()
-scan_result = scan(options.ip_address, options.subnet_mask)
+returned_options = get_arguments()
+scan_result = scan(returned_options.ip_address, returned_options.subnet_mask)
 print_result(scan_result)
