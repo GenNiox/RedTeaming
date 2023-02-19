@@ -50,7 +50,7 @@ def arp_spoof_target(target_ip, gateway_ip):
 options = get_arguments()
 print("[ ] Script Started.")
 print("[+] Querying for MAC Address..")
-mitm_mac_address = mitm_mac(options.mitm_interface)
+# mitm_mac_address = mitm_mac(options.mitm_interface)
 print("[+] Spoofing Target..")
 arp_spoof_target(options.target_ip, options.gateway_ip)
 print("[+] Spoofed Target!")
