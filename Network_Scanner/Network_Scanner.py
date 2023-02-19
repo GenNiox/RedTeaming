@@ -3,6 +3,7 @@
 import argparse
 import scapy.all as scapy
 
+
 def get_arguments():
     parser = argparse.ArgumentParser()
     parser.add_argument("-i", "--ip-address", dest="ip_address", help="IP Address range to scan (i.e. 10.1.1.1)")
@@ -14,18 +15,20 @@ def get_arguments():
         parser.error("[-] Please specify a Subnet mask in CIDR notation, use --help for more info.")
     return options
 
+
 def scan(ip_address, subnet_mask):
     ip = str(ip_address) + "/" + str(subnet_mask)
     arp_request = scapy.ARP(pdst=ip)
     broadcast = scapy.Ether(dst="ff:ff:ff:ff:ff:ff")
     arp_request_broadcast = broadcast/arp_request
-    answered_list = scapy.srp(arp_request_broadcast, timeout=1, verbose=False)[0]  # srp allows to send with custom addresses.
+    answered_list = scapy.srp(arp_request_broadcast, timeout=1, verbose=False)[0]  # srp allows custom addresses.
 
     response_list = []
     for answer in answered_list:
         response_dict = {"ip": answer[1].psrc, "mac": answer[1].hwsrc}
         response_list.append(response_dict)
     return response_list
+
 
 def print_result(results_list):
     print("=================================================")
