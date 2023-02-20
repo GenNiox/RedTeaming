@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 import argparse
 import scapy.all as scapy
-from scapy import http
+from scapy.layers import http
 import netfilterqueue
 
 
