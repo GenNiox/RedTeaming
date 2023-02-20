@@ -16,7 +16,7 @@ def get_arguments():
 
 
 def get_url(packet):
-    url = str(packet[http.HTTPRequest].Host + packet[http.HTTPRequest].Path)
+    url = packet[http.HTTPRequest].Host + packet[http.HTTPRequest].Path
 
 
 def get_login_info(packet):
@@ -36,7 +36,7 @@ def process_sniffed_packet(packet):
     # HTTP requests
     if packet.haslayer(http.HTTPRequest):
         url = get_url(packet)
-        print("[+] HTTP Request --> " + url + "\n")
+        print("[+] HTTP Request --> " + url.decode() + "\n")
         login_info = get_login_info(packet)
         if login_info:
             print("\n\n[+] Login Detected --> " + login_info + "\n\n")
