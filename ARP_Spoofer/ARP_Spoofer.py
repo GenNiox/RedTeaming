@@ -7,6 +7,7 @@ import re
 import time
 import sys
 
+
 def get_arguments():
     parser = argparse.ArgumentParser()
     parser.add_argument("-i", "--interface", dest="mitm_interface", help="Attacker's interface to execute Man-in-the-Middle (MITM) attack (i.e. eth0)")
