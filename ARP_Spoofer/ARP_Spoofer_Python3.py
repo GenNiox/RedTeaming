@@ -85,7 +85,7 @@ try:
         print("[+] Spoofed Gateway!")
         sent_packets_count = sent_packets_count + 2
         print("\r[+] Times attacked: " + str(sent_packets_count), end="")
-        print("[+] Waiting for 2 seconds..")
+        print("[+] Waiting for 30 seconds..")
         time.sleep(30)
         print("[+] Looping attack.")
 except KeyboardInterrupt:
