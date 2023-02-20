@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 import argparse
 import scapy.all as scapy
+import netfilterqueue
 
 
 # Kali Commands:
@@ -10,9 +11,6 @@ import scapy.all as scapy
 # sudo apt install libnetfilter-queue-dev libnetfilter-queue1
 # pip3 install netfilterqueue
 # iptables --flush  # Once finished with packet interception
-
-
-import NetFilterQueue
 
 
 def get_arguments():
@@ -32,7 +30,7 @@ def process_packet(packet):
 
 
 options = get_arguments()
-queue = NetFilterQueue.NetfilterQueue()
-queue.bind(options.queue_number, process_packet)
+queue = netfilterqueue.NetfilterQueue()
+queue.bind(int(options.queue_number), process_packet)
 queue.run
 
