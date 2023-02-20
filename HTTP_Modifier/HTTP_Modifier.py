@@ -16,6 +16,7 @@ import netfilterqueue
 # (as root) echo 1 > /proc/sys/net/ipv4/ip_forward
 # (as root) service apache2 start
 
+
 def get_arguments():
     parser = argparse.ArgumentParser()
     parser.add_argument("-q", "--queue-number", dest="queue_number", help="Setup via the iptables --queue-num switch)")
