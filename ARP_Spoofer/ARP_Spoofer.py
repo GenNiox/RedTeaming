@@ -74,6 +74,7 @@ if not options.target_mac:
     print("[+] Querying for Target MAC Address..")
     target_mac = get_mac(options.target_ip)
 else:
+    target_mac = options.target_mac
     print("[+] Specified Target MAC: " + str(options.target_mac))
 print("[+] Querying for Gateway MAC Address..")
 gateway_mac = get_mac(options.gateway_ip)
