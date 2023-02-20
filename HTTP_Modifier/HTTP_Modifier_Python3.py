@@ -35,11 +35,8 @@ def set_load(packet, load):
 def process_packet(packet):
     scapy_packet = scapy.IP(packet.get_payload())
     if scapy.Raw in scapy_packet and scapy.TCP in scapy_packet:
-        print("[+] YES!")
         if scapy_packet[scapy.TCP].dport == 80:
-            print("[+] MORE YES!")
             if ".exe" in str(scapy_packet[scapy.Raw].load):
-                print("[+] EVEN MORE YES!")
                 print("[+] .exe Request]")
                 ack_list.append(scapy_packet[scapy.TCP].ack)
         elif scapy_packet[scapy.TCP].sport == 80:
