@@ -6,8 +6,6 @@ import netfilterqueue
 
 # Kali Commands:
 # iptables -I FORWARD -j NFQUEUE --queue-num 0  # For forwarded (remote machine) packet testing
-# iptables -I FORWARD -j OUTPUT --queue-num 0  # For local machine outbound testing
-# iptables -I FORWARD -j INPUT --queue-num 0  # For local machine inbound testing
 # sudo apt install libnetfilter-queue-dev libnetfilter-queue1
 # pip3 install netfilterqueue
 # iptables --flush  # Once finished with packet interception
@@ -31,6 +29,6 @@ def process_packet(packet):
 
 options = get_arguments()
 queue = netfilterqueue.NetfilterQueue()
-queue.bind(int(options.queue_number), process_packet)
+queue.bind(options.queue_number, process_packet)
 queue.run
 
