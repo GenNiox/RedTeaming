@@ -42,5 +42,7 @@ def process_sniffed_packet(packet):
             print("\n\n[+] Login Detected --> " + login_info + "\n\n")
 
 
+print("[+] Initiating Packet Sniffer..")
 options = get_arguments()
+print("[+] Sniffing packets from " + options.interface + "..")
 sniff(options.interface)
