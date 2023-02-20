@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# bettercap -iface interface -caplet hstshijack/hstshijack
 
 
 import scapy.all as scapy
