@@ -35,7 +35,7 @@ def set_load(packet, load):
 
 def process_packet(packet):
     scapy_packet = scapy.IP(packet.get_payload())
-    if scapy.Raw in scapy_packet and scapy.TCP in scapy_packet:
+    if scapy_packet.haslayer(scapy.Raw) and scapy_packet.haslayer(scapy.TCP):
         if scapy_packet[scapy.TCP].dport == 80:
             if ".exe" in scapy_packet[scapy.Raw].load:
                 print("[+] .exe Request]")
