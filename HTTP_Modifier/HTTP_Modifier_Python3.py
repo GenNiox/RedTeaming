@@ -4,11 +4,16 @@ import scapy.all as scapy
 import netfilterqueue
 
 
-# Kali Commands:
-# iptables -I FORWARD -j NFQUEUE --queue-num 0  # For forwarded (remote machine) packet testing
 # sudo apt install libnetfilter-queue-dev libnetfilter-queue1
-# pip3 install netfilterqueue
+# For Zaid's custom Kali:
+#   pip3 install netfilterqueue
+# For Kali-Proper:
+#   git clone https://github.com/oremanj/python-netfilterqueue
+#   sudo pip3 install .
 # iptables --flush  # Once finished with packet interception
+# iptables -I FORWARD -j NFQUEUE --queue-num 0  # For forwarded (remote machine) packet testing
+# (as root) echo 1 > /proc/sys/net/ipv4/ip_forward
+# (as root) service apache2 start
 
 
 def get_arguments():
