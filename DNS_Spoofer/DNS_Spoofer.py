@@ -22,13 +22,16 @@ def get_arguments():
 
 def process_packet(packet):
     scapy_packet = scapy.IP(packet.get_payload())
-    print(scapy_packet.show)
+    print(scapy_packet.show())
     # packet.accept()  # Forwards packets
     # packet.drop()  # Drops packets
 
 
 options = get_arguments()
+print("[+] Initiating DNS Spoofer..")
+print("[+] Setting up NetfilterQueue..")
 queue = netfilterqueue.NetfilterQueue()
-queue.bind(options.queue_number, process_packet)
-queue.run
+queue.bind(int(options.queue_number), process_packet)
+print("[+] Spoofing DNS of queue number " + str(options.queue_number))
+queue.run()
 
