@@ -16,12 +16,12 @@ def get_arguments():
 
 
 def get_url(packet):
-    url = packet[http.HTTPRequest].Host + packet[http.HTTPRequest].Path
+    url = str(packet[http.HTTPRequest].Host + packet[http.HTTPRequest].Path)
 
 
 def get_login_info(packet):
     if packet.haslayer(scapy.Raw):
-        load = packet[scapy.Raw].load
+        load = str(packet[scapy.Raw].load)
         keywords = ["username", "user", "login", "password", "pass"]
         for keyword in keywords:
             if keyword in load:
