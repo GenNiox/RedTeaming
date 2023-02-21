@@ -119,7 +119,7 @@ if options.mac_change_type == "v" or options.mac_change_type == "V":
     for vendor in vendor_list_usable:
         print("[+] " + vendor)
     vendor_list_choice = input("Select a vendor from the list (Case-sensitive!): ")
-    print("[+] Randomly selecting MAC Address prefix from the chosen " + vendor + "list..")
+    print("[+] Randomly selecting MAC Address prefix from the chosen " + vendor_list_choice + " list..")
     text_file_choice = cwd + "/Vendor_MAC_Files/" + str(vendor_list_choice) + ".txt"
     text_file_choice_open = open(text_file_choice, "r")
     text_file_choice_text = text_file_choice_open.read()
@@ -147,7 +147,7 @@ if options.mac_change_type == "v" or options.mac_change_type == "V":
     print("[+] Executed MAC Address change!")
     new_current_mac = detect_mac(options.interface)
     print("[+] Validating MAC Address..")
-    if str(new_current_mac).upper() == str(full_mac).upper():
+    if str(new_current_mac).lower() == str(full_mac).lower():
         print("[+] Validated MAC Address on " + options.interface + "!")
         print("[+] Old MAC Address: " + str(old_current_mac))
         print("[+] New MAC Address: " + str(new_current_mac))
