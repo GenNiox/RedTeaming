@@ -152,7 +152,7 @@ if options.mac_change_type == "v" or options.mac_change_type == "V":
         print("[+] Old MAC Address: " + str(old_current_mac))
         print("[+] New MAC Address: " + str(new_current_mac))
     else:
-        print("[-] Error when changing MAC Address..")
+        print("[-] Error when changing MAC Address on " + options.interface)
         print("[-] Old MAC: " + str(old_current_mac))
         print("[-] New MAC: " + str(new_current_mac))
 
