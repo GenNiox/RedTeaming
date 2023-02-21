@@ -79,9 +79,9 @@ def import_vendor_text_file(vendor):
     text_file = cwd + "/Vendor_MAC_Files/" + str(vendor) + ".txt"
     if not os.path.exists(text_file):
         if len(vendor) <= 3:
-            print("[-] No " + str(vendor) + " file!  \t(/Vendor_MAC_Files/" + str(vendor) + ".txt)")
+            print("[-] No " + str(vendor) + " file!  \t(" + cwd + "/Vendor_MAC_Files/" + str(vendor) + ".txt)")
         else:
-            print("[-] No " + str(vendor) + " file!\t(/Vendor_MAC_Files/" + str(vendor) + ".txt)")
+            print("[-] No " + str(vendor) + " file!\t(" + cwd + "/Vendor_MAC_Files/" + str(vendor) + ".txt)")
     else:
         print("[+] " + str(vendor) + "vendor file detected!")
         print("------------------")
