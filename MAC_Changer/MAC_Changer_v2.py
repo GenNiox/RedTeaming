@@ -113,10 +113,10 @@ if options.mac_change_type == "v" or options.mac_change_type == "V":
     text_file_choice_open = open(text_file_choice, "r")
     text_file_choice_text = text_file_choice_open.read()
     counter = 0
-    re_mac_list = re.findall(r"\w\w:\w\w:\w\w", text_file_choice_text)
+    re_mac_list = re.findall(r"\w\w:\w\w:\w\w", str(text_file_choice_text))
     for vendor_mac in re_mac_list:
         counter = counter + 1
-    print(str(counter) + " --> " + vendor_mac)
+        print(str(counter) + " --> " + vendor_mac)
     text_file_choice_open.close()
 
 
