@@ -78,7 +78,7 @@ def import_vendor_text_file(vendor):
     cwd = os.getcwd()
     text_file = str(cwd) + "/Vendor_MAC_Files/" + vendor + ".txt"
     if not os.path.exists(text_file):
-        print("[-] No " + vendor + " \t(/Vendor_MAC_Files/" + vendor + ".txt) file!")
+        print("[-] No " + vendor + "\t(/Vendor_MAC_Files/" + vendor + ".txt) file!")
     else:
         print("[+] " + vendor + "vendor file detected!")
         print("------------------")
