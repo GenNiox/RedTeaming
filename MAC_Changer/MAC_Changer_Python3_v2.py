@@ -147,9 +147,7 @@ if options.mac_change_type == "v" or options.mac_change_type == "V":
     print("[+] Executed MAC Address change!")
     new_current_mac = detect_mac(options.interface)
     print("[+] Validating MAC Address..")
-    print("newcurrentmac: " + new_current_mac)
-    print("fullmac: " + full_mac)
-    if new_current_mac.upper() == full_mac.upper():
+    if str(new_current_mac.upper()) == str(ull_mac.upper()):
         print("[+] Validated MAC Address on " + options.interface + "!")
         print("[+] Old MAC Address: " + str(old_current_mac))
         print("[+] New MAC Address: " + str(new_current_mac))
@@ -178,7 +176,7 @@ elif options.mac_change_type == "c" or options.mac_change_type == "C":
         print("[+] Executed MAC Address change!")
         new_current_mac = detect_mac(options.interface)
         print("[+] Validating MAC Address..")
-        if new_current_mac.upper() == options.newMAC.upper():
+        if str(new_current_mac.upper()) == str(options.newMAC.upper()):
             print("[+] Validated MAC Address on " + options.interface + "!")
             print("[+] Old MAC Address: " + str(old_current_mac))
             print("[+] New MAC Address: " + str(new_current_mac))
