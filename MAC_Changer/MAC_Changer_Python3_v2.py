@@ -46,7 +46,7 @@ def get_arguments():
     parser.add_argument("-i", "--interface", dest="interface", help="Changes the MAC Address of the specified interface")
     parser.add_argument("-m", "--mac", "--mac-address", dest="newMAC", required=False, help="Desired MAC Address; used with '-m c'")
     parser.add_argument("-t", "--type", dest="mac_change_type", help="Type of MAC Address change (i.e. (c)ustom or (v)endor")
-    (options, arguments) = parser.parse_args()  # Include once at the end
+    (options) = parser.parse_args()  # Include once at the end
     if not options.interface:
         parser.error("[-] Please specify an interface, use --help for more info.")
     if not options.mac_change_type:
