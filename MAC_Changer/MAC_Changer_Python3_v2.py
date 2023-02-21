@@ -83,11 +83,13 @@ def import_vendor_text_file(vendor):
         else:
             print("[-] No " + str(vendor) + " file!\t(" + cwd + "/Vendor_MAC_Files/" + str(vendor) + ".txt)")
     else:
-        print("[+] " + str(vendor) + "vendor file detected!")
+        print("[+] " + str(vendor) + " file detected!")
         print("------------------")
-        text_file_text = open(text_file, "r")
+        text_file_open = open(text_file, "r")
+        text_file_text = text_file_open.read()
         print(text_file_text)
         print("------------------")
+        text_file_open.close()
 
 
 options = get_arguments()
