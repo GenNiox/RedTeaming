@@ -104,7 +104,8 @@ if options.mac_change_type == "v" or options.mac_change_type == "V":
     backup_file = "Previous_MAC_Addresses.txt"
     backup_file_open_write = open(str(cwd) + "/" + backup_file, "a")
     date = datetime.datetime.now()
-    backup_string = backup_file_open_write.write(str(date) + " --> " + old_current_mac)
+    backup_file_open_write.write(str(date) + " --> " + old_current_mac)
+    backup_file_open_write.close()
     vendor_list = ["Juniper", "Cisco", "Brocade", "HP", "Netgear", "TP-Link", "ASUS", "Motorola", "Synology", "Linksys"]
     print("[+] Loading Vendor MAC Addresses..")
     vendor_list_usable = []
