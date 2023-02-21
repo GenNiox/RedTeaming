@@ -116,7 +116,7 @@ if options.mac_change_type == "v" or options.mac_change_type == "V":
     re_mac_list = re.findall(r"\w\w:\w\w:\w\w", str(text_file_choice_text))
     vendor_list_choice_count = len(re_mac_list)
     random_mac_number = random.randrange(1, vendor_list_choice_count)
-    print(random_mac_number + " --> " + re_mac_list[random_mac_number])
+    print(int(random_mac_number) + " --> " + re_mac_list[random_mac_number])
     text_file_choice_open.close()
 
 
