@@ -44,14 +44,14 @@ import os
 def get_arguments():
     parser = optparse.OptionParser()
     parser.add_option("-i", "--interface", dest="interface", help="Changes the MAC Address of the specified interface")
-    parser.add_option("-m", "--mac", "--mac-address", dest="newMAC", required=False, help="Desired MAC Address; used with '-m c'")
+    parser.add_option("-m", "--mac", "--mac-address", dest="newMAC", required=False, help="Desired MAC Address; used with '-t c'")
     parser.add_option("-t", "--type", dest="mac_change_type", help="Type of MAC Address change (i.e. (c)ustom or (v)endor")
     (options, arguments) = parser.parse_args()  # Include once at the end
     if not options.interface:
         parser.error("[-] Please specify an interface, use --help for more info.")
     if not options.mac_change_type:
         parser.error("[-] Please specify a MAC Address change type, use --help for more info.")
-    if not options.newMAC == "c" or options.newMAC == "C" or options.newMAC == "v" or options.newMAC == "V":
+    if not options.mac_change_type == "c" and not options.mac_change_type == "C" and not options.mac_change_type == "v" and not options.mac_change_type == "V":
         parser.error("[-] Invalid MAC Address change type, use --help for more info.")
     return options
 

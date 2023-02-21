@@ -51,7 +51,7 @@ def get_arguments():
         parser.error("[-] Please specify an interface, use --help for more info.")
     if not options.mac_change_type:
         parser.error("[-] Please specify a MAC Address change type, use --help for more info.")
-    if not options.newMAC == str("c") and not options.newMAC == str("C") and not options.newMAC == str("v") and not options.newMAC == str("V"):
+    if not options.mac_change_type == "c" and not options.mac_change_type == "C" and not options.mac_change_type == "v" and not options.mac_change_type == "V":
         parser.error("[-] Invalid MAC Address change type, use --help for more info.")
     return options
 
@@ -75,7 +75,7 @@ def detect_mac (interface):
 
 
 options = get_arguments()
-if options.mac_change_type == str("v") or options.mac_change_type == str("V"):
+if options.mac_change_type == "v" or options.mac_change_type == "V":
     print("[+] Loading Vendor MAC Addresses..")
     text_file_juniper = open(os.getcwd("/Vendor_MAC_Files/Juniper.txt"))
     print(text_file_juniper)
@@ -85,7 +85,7 @@ if options.mac_change_type == str("v") or options.mac_change_type == str("V"):
 # 3. Randomly select a Prefix from the List
 # 4. Create the second-half of the MAC Address
 
-elif options.mac_change_type == str("c") or options.mac_change_type == str("C"):
+elif options.mac_change_type == "c" or options.mac_change_type == "C":
     valid_mac_check = re.findall(r"\w\w:\w\w:\w\w:\w\w:\w\w:\w\w"), str(options.newMAC)
     if valid_mac_check:
         old_current_mac = detect_mac(options.interface)
