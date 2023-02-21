@@ -75,7 +75,7 @@ def detect_mac (interface):
 
 
 def import_vendor_text_file(vendor):
-    cwd = os.getcwd()
+    cwd = os.path.dirname(os.path.realpath(__file__))
     text_file = cwd + "/Vendor_MAC_Files/" + str(vendor) + ".txt"
     if not os.path.exists(text_file):
         if len(vendor) <= 3:
