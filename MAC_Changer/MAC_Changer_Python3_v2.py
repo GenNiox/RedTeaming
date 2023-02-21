@@ -85,8 +85,8 @@ def import_vendor_text_file(vendor):
     else:
         print("[+] " + str(vendor) + "vendor file detected!")
         print("------------------")
-        open(text_file)
-        print(text_file)
+        text_file_text = open(text_file, "r")
+        print(text_file_text)
         print("------------------")
 
 
