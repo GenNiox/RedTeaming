@@ -86,6 +86,9 @@ if options.mac_change_type == "v" or options.mac_change_type == "V":
 # 4. Create the second-half of the MAC Address
 
 elif options.mac_change_type == "c" or options.mac_change_type == "C":
+    if not options.newMAC:
+        print("[-] No MAC Address specified!")
+        exit(1)
     valid_mac_check = re.findall(r"\w\w:\w\w:\w\w:\w\w:\w\w:\w\w"), str(options.newMAC)
     if valid_mac_check:
         old_current_mac = detect_mac(options.interface)
