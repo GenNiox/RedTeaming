@@ -41,6 +41,7 @@ import re
 import os
 import random
 import datetime
+import time
 
 
 def get_arguments():
@@ -144,7 +145,8 @@ if options.mac_change_type == "v" or options.mac_change_type == "V":
     full_mac = str(random_vendor_mac) + str(generated_mac)
     print("[+] Initiating MAC Address change..")
     change_mac(options.interface, full_mac)
-    print("[+] Executed MAC Address change")
+    print("[+] Executed MAC Address change!")
+    time.sleep(1)
     new_current_mac = detect_mac(options.interface)
     print("[+] Validating MAC Address..")
     print("newcurrentmac: " + new_current_mac)
@@ -175,7 +177,7 @@ elif options.mac_change_type == "c" or options.mac_change_type == "C":
         old_current_mac = detect_mac(options.interface)
         print("[+] Initiating MAC Address change..")
         change_mac(options.interface, options.newmac)
-        print("[+] Executed MAC Address change")
+        print("[+] Executed MAC Address change!")
         new_current_mac = detect_mac(options.interface)
         print("[+] Validating MAC Address..")
         if new_current_mac == options.newMAC:
