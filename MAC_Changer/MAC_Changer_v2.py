@@ -74,12 +74,25 @@ def detect_mac (interface):
         print("[-] MAC_Changer threw an error when detecting a MAC Address!")
 
 
+def import_vendor_text_file(vendor):
+    cwd = os.getcwd()
+    text_file = str(cwd) + "/Vendor_MAC_Files/" + vendor + ".txt"
+    if not text_file:
+        print("[-] No " + vendor + "(/Vendor_MAC_Files/" + vendor + ".txt) file!")
+    else:
+        print("[+] " + vendor + "vendor file detected!")
+        print("------------------")
+        open(text_file)
+        print(text_file)
+        print("------------------")
+
+
 options = get_arguments()
 if options.mac_change_type == "v" or options.mac_change_type == "V":
+    vendor_list = ["Juniper", "Cisco", "Brocade", "HP", "Netgear", "TP-Link", "ASUS", "Motorola", "Synology", "Linksys"]
     print("[+] Loading Vendor MAC Addresses..")
-    cwd = os.getcwd()
-    text_file_juniper = open(str(cwd) + "/Vendor_MAC_Files/Juniper.txt")
-    print(text_file_juniper)
+    for vendor in vendor_list:
+        import_vendor_text_file(vendor)  # File names *MUST* match the vendor_list names (case-sensitive!)
 # 1. Import Various Vendor Models Text Files
 #       Using link: https://www.wireshark.org/tools/oui-lookup.html
 # 2. Select a Vendor Prefix (XX:XX:XX)
