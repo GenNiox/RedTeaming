@@ -76,13 +76,14 @@ def detect_mac (interface):
 
 def import_vendor_text_file(vendor):
     cwd = os.getcwd()
-    if len(vendor) <= 3:
-        vendor = str(vendor) + "  "
-    text_file = str(cwd) + "/Vendor_MAC_Files/" + vendor + ".txt"
+    text_file = str(cwd) + "/Vendor_MAC_Files/" + str(vendor) + ".txt"
     if not os.path.exists(text_file):
-        print("[-] No " + vendor + " file\t(/Vendor_MAC_Files/" + vendor + ".txt)!")
+        if len(vendor) <= 3:
+            print("[-] No " + str(vendor) + " file!  \t(/Vendor_MAC_Files/" + str(vendor) + ".txt)")
+        else:
+            print("[-] No " + str(vendor) + " file!\t(/Vendor_MAC_Files/" + str(vendor) + ".txt)")
     else:
-        print("[+] " + vendor + "vendor file detected!")
+        print("[+] " + str(vendor) + "vendor file detected!")
         print("------------------")
         open(text_file)
         print(text_file)
