@@ -24,7 +24,7 @@
 #    [ ] Motorola
 #    [ ] Synology
 #    [ ] Linksys
-
+import random
 #
 # Notes:
 # If you need this script to run in Python v2:
@@ -114,8 +114,9 @@ if options.mac_change_type == "v" or options.mac_change_type == "V":
     text_file_choice_text = text_file_choice_open.read()
     counter = 0
     re_mac_list = re.findall(r"\w\w:\w\w:\w\w", str(text_file_choice_text))
-    print(len(re_mac_list))
-
+    vendor_list_choice_count = len(re_mac_list)
+    random_mac_number = random.randrange(1, vendor_list_choice_count)
+    print(random_mac_number + " --> " + re_mac_list[random_mac_number])
     text_file_choice_open.close()
 
 
