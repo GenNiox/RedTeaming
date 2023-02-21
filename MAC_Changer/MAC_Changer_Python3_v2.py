@@ -51,7 +51,7 @@ def get_arguments():
         parser.error("[-] Please specify an interface, use --help for more info.")
     if not options.mac_change_type:
         parser.error("[-] Please specify a MAC Address change type, use --help for more info.")
-    if not options.newMAC == "c" or options.newMAC == "C" or options.newMAC == "v" or options.newMAC == "V":
+    if not options.newMAC == "c" or not options.newMAC == "C" or not options.newMAC == "v" or not options.newMAC == "V":
         parser.error("[-] Invalid MAC Address change type, use --help for more info.")
     return options
 
