@@ -24,7 +24,6 @@
 #    [ ] Motorola
 #    [ ] Synology
 #    [ ] Linksys
-import random
 #
 # Notes:
 # If you need this script to run in Python v2:
@@ -40,6 +39,9 @@ import subprocess
 import argparse  # Allows for command-line argument structure
 import re
 import os
+import random
+import datetime
+
 
 def get_arguments():
     parser = argparse.ArgumentParser()
@@ -54,6 +56,7 @@ def get_arguments():
     if not options.mac_change_type == "c" and not options.mac_change_type == "C" and not options.mac_change_type == "v" and not options.mac_change_type == "V":
         parser.error("[-] Invalid MAC Address change type, use --help for more info.")
     return options
+
 
 def change_mac (interface, newmac):
     print("[+] Disabling interface: " + interface)
@@ -95,6 +98,13 @@ def get_vendor_list(vendor):
 
 options = get_arguments()
 if options.mac_change_type == "v" or options.mac_change_type == "V":
+    print("[+] Querying current MAC Address..")
+    cwd = os.path.dirname(os.path.realpath(__file__))
+    old_current_mac = detect_mac(options.interface)
+    backup_file = "Previous_MAC_Addresses.txt"
+    backup_file_open_write = open(str(cwd) + "/" + backup_file, "a")
+    date = datetime.datetime.now()
+    backup_string = backup_file_open_write.write(str(date) + " --> " + old_current_mac)
     vendor_list = ["Juniper", "Cisco", "Brocade", "HP", "Netgear", "TP-Link", "ASUS", "Motorola", "Synology", "Linksys"]
     print("[+] Loading Vendor MAC Addresses..")
     vendor_list_usable = []
@@ -108,16 +118,42 @@ if options.mac_change_type == "v" or options.mac_change_type == "V":
     for vendor in vendor_list_usable:
         print("[+] " + vendor)
     vendor_list_choice = input("Select a vendor from the list (Case-sensitive!): ")
-    cwd = os.path.dirname(os.path.realpath(__file__))
+    print("[+] Randomly selecting MAC Address prefix from the chosen " + vendor + "list..")
     text_file_choice = cwd + "/Vendor_MAC_Files/" + str(vendor_list_choice) + ".txt"
     text_file_choice_open = open(text_file_choice, "r")
     text_file_choice_text = text_file_choice_open.read()
-    counter = 0
     re_mac_list = re.findall(r"\w\w:\w\w:\w\w", str(text_file_choice_text))
-    vendor_list_choice_count = len(re_mac_list)
-    random_mac_number = random.randrange(1, vendor_list_choice_count)
-    print(str(random_mac_number) + " --> " + str(re_mac_list[random_mac_number]))
+    vendor_list_choice_count = len(re_mac_list) - 1
+    random_mac_number = random.randrange(0, vendor_list_choice_count)
+    random_vendor_mac = str(re_mac_list[random_mac_number])
     text_file_choice_open.close()
+    print("[+] Generating MAC suffix..")
+    generated_mac = str()
+    mac_char_table = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "a", "b", "c", "d", "e", "f"]
+    counter = 0
+    while not counter == 6:
+        counter = int(counter) + 1
+        generated_mac_random_number_selection = random.randrange(0, 15)
+        generated_mac = str(generated_mac) + mac_char_table[generated_mac_random_number_selection]
+        if counter == 2 or counter == 4:
+            generated_mac = str(generated_mac) + ":"
+        if counter == 6:
+            break
+    print("[+] Concatenating..")
+    full_mac = str(random_vendor_mac) + str(generated_mac)
+    print("[+] Initiating MAC Address Change..")
+    change_mac(options.interface, full_mac)
+    print("[+] Executed MAC Address Change")
+    new_current_mac = detect_mac(options.interface)
+    print("[+] Validating MAC Address..")
+    if new_current_mac == full_mac:
+        print("[+] Validated MAC Address on " + options.interface + "!")
+        print("[+] Old MAC Address: " + str(old_current_mac))
+        print("[+] New MAC Address: " + str(new_current_mac))
+    else:
+        print("[-] Error when changing MAC Address..")
+        print("[-] Old MAC: " + str(old_current_mac))
+        print("[-] New MAC: " + str(new_current_mac))
 
 
 # 1. Import Various Vendor Models Text Files
@@ -125,6 +161,7 @@ if options.mac_change_type == "v" or options.mac_change_type == "V":
 # 2. Select a Vendor Prefix (XX:XX:XX)
 # 3. Randomly select a Prefix from the List
 # 4. Create the second-half of the MAC Address
+
 
 elif options.mac_change_type == "c" or options.mac_change_type == "C":
     if not options.newMAC:
