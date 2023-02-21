@@ -114,7 +114,7 @@ if options.mac_change_type == "v" or options.mac_change_type == "V":
     text_file_choice_text = text_file_choice_open.read()
     counter = 0
     re_mac_list = re.findall(r"\w\w:\w\w:\w\w", str(text_file_choice_text))
-    print(re_mac_list.count())
+    print(len(re_mac_list))
 
     text_file_choice_open.close()
 
