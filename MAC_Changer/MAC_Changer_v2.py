@@ -141,7 +141,7 @@ if options.mac_change_type == "v" or options.mac_change_type == "V":
         if counter == 6:
             break
     print("[+] Concatenating..")
-    full_mac = (str(random_vendor_mac) + str(generated_mac)).lower()
+    full_mac = str(random_vendor_mac) + str(generated_mac)
     print("[+] Initiating MAC Address change..")
     change_mac(options.interface, full_mac)
     print("[+] Executed MAC Address change!")
