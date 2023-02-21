@@ -74,7 +74,8 @@ def detect_mac (interface):
         print("[-] MAC_Changer threw an error when detecting a MAC Address!")
 
 
-def import_vendor_text_file(vendor):
+def get_vendor_list(vendor):
+    vendor_exists = 0
     cwd = os.path.dirname(os.path.realpath(__file__))
     text_file = cwd + "/Vendor_MAC_Files/" + str(vendor) + ".txt"
     if not os.path.exists(text_file):
@@ -84,20 +85,40 @@ def import_vendor_text_file(vendor):
             print("[-] No " + str(vendor) + " file!\t(" + cwd + "/Vendor_MAC_Files/" + str(vendor) + ".txt)")
     else:
         print("[+] " + str(vendor) + " file detected!")
-        print("------------------")
-        text_file_open = open(text_file, "r")
-        text_file_text = text_file_open.read()
-        print(text_file_text)
-        print("------------------")
-        text_file_open.close()
+        vendor_exists = vendor
+        if not vendor_exists == 0:
+            return vendor
+        else:
+            vendor = 0
+            return vendor
 
 
 options = get_arguments()
 if options.mac_change_type == "v" or options.mac_change_type == "V":
     vendor_list = ["Juniper", "Cisco", "Brocade", "HP", "Netgear", "TP-Link", "ASUS", "Motorola", "Synology", "Linksys"]
     print("[+] Loading Vendor MAC Addresses..")
+    vendor_list_usable = []
     for vendor in vendor_list:
-        import_vendor_text_file(vendor)  # File names *MUST* match the vendor_list names (case-sensitive!)
+        get_vendor_list(vendor)  # File names *MUST* match the vendor_list names (case-sensitive!)
+        if not vendor == 0:
+            vendor_list_usable += vendor
+    print("===================")
+    print("[+] Vendor List:  |")
+    print("===================")
+    for vendor in vendor_list_usable:
+        print("[+] " + vendor)
+    vendor_list_choice = input("Select a vendor from the list (Case-sensitive!): ")
+    cwd = os.path.dirname(os.path.realpath(__file__))
+    text_file_choice = cwd + "/Vendor_MAC_Files/" + str(vendor_list_choice) + ".txt"
+    text_file_choice_open = open(text_file_choice, "r")
+    text_file_choice_text = text_file_choice_open.read()
+    counter = 0
+    for mac_vendor in text_file_choice_text:
+        counter = counter + 1
+    print(counter + " --> " + mac_vendor)
+    text_file_choice_open.close()
+
+
 # 1. Import Various Vendor Models Text Files
 #       Using link: https://www.wireshark.org/tools/oui-lookup.html
 # 2. Select a Vendor Prefix (XX:XX:XX)
