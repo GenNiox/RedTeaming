@@ -92,6 +92,7 @@ def get_vendor_list(vendor):
             vendor = 0
             return vendor
 
+
 options = get_arguments()
 if options.mac_change_type == "v" or options.mac_change_type == "V":
     vendor_list = ["Juniper", "Cisco", "Brocade", "HP", "Netgear", "TP-Link", "ASUS", "Motorola", "Synology", "Linksys"]
@@ -100,7 +101,7 @@ if options.mac_change_type == "v" or options.mac_change_type == "V":
     for vendor in vendor_list:
         get_vendor_list(vendor)  # File names *MUST* match the vendor_list names (case-sensitive!)
         if not vendor == 0:
-            vendor_list_usable += vendor
+            vendor_list_usable.append(vendor)
     print("===================")
     print("[+] Vendor List:  |")
     print("===================")
@@ -114,7 +115,7 @@ if options.mac_change_type == "v" or options.mac_change_type == "V":
     counter = 0
     for mac_vendor in text_file_choice_text:
         counter = counter + 1
-    print(counter + " --> " + mac_vendor)
+    print(str(counter) + " --> " + mac_vendor)
     text_file_choice_open.close()
 
 
