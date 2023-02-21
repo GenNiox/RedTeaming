@@ -44,14 +44,14 @@ import os
 def get_arguments():
     parser = argparse.ArgumentParser()
     parser.add_argument("-i", "--interface", dest="interface", help="Changes the MAC Address of the specified interface")
-    parser.add_argument("-m", "--mac", "--mac-address", dest="newMAC", required=False, help="Desired MAC Address; used with '-m c'")
+    parser.add_argument("-m", "--mac", "--mac-address", dest="newMAC", required=False, help="Desired MAC Address; used with '-t c'")
     parser.add_argument("-t", "--type", dest="mac_change_type", help="Type of MAC Address change (i.e. (c)ustom or (v)endor")
     (options) = parser.parse_args()  # Include once at the end
     if not options.interface:
         parser.error("[-] Please specify an interface, use --help for more info.")
     if not options.mac_change_type:
         parser.error("[-] Please specify a MAC Address change type, use --help for more info.")
-    if not options.newMAC == "c" or not options.newMAC == "C" or not options.newMAC == "v" or not options.newMAC == "V":
+    if not options.newMAC == str("c") or not options.newMAC == str("C") or not options.newMAC == str("v") or not options.newMAC == str("V"):
         parser.error("[-] Invalid MAC Address change type, use --help for more info.")
     return options
 
@@ -75,7 +75,7 @@ def detect_mac (interface):
 
 
 options = get_arguments()
-if options.mac_change_type == "v" or options.mac_change_type == "V":
+if options.mac_change_type == str("v") or options.mac_change_type == str("V"):
     print("[+] Loading Vendor MAC Addresses..")
     text_file_juniper = open(os.getcwd("/Vendor_MAC_Files/Juniper.txt"))
     print(text_file_juniper)
@@ -85,7 +85,7 @@ if options.mac_change_type == "v" or options.mac_change_type == "V":
 # 3. Randomly select a Prefix from the List
 # 4. Create the second-half of the MAC Address
 
-elif options.mac_change_type == "c" or options.mac_change_type == "C":
+elif options.mac_change_type == str("c") or options.mac_change_type == str("C"):
     valid_mac_check = re.findall(r"\w\w:\w\w:\w\w:\w\w:\w\w:\w\w"), str(options.newMAC)
     if valid_mac_check:
         old_current_mac = detect_mac(options.interface)
