@@ -126,7 +126,7 @@ if options.mac_change_type == "v" or options.mac_change_type == "V":
     re_mac_list = re.findall(r"\w\w:\w\w:\w\w", str(text_file_choice_text))
     vendor_list_choice_count = len(re_mac_list) - 1
     random_mac_number = random.randrange(0, vendor_list_choice_count)
-    random_vendor_mac = str(re_mac_list[random_mac_number])
+    random_vendor_mac = str(re_mac_list[random_mac_number]) + ":"
     text_file_choice_open.close()
     print("[+] Generating MAC suffix..")
     generated_mac = str()
