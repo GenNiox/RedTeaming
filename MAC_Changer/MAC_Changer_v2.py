@@ -136,7 +136,7 @@ if options.mac_change_type == "v" or options.mac_change_type == "V":
         counter = int(counter) + 1
         generated_mac_random_number_selection = random.randrange(0, 15)
         generated_mac = str(generated_mac) + mac_char_table[generated_mac_random_number_selection]
-        if counter == 2 or counter == 4:
+        if counter == 2 or counter == 4 or counter == 6:
             generated_mac = str(generated_mac) + ":"
         if counter == 6:
             break
