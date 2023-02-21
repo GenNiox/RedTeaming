@@ -142,11 +142,13 @@ if options.mac_change_type == "v" or options.mac_change_type == "V":
             break
     print("[+] Concatenating..")
     full_mac = str(random_vendor_mac) + str(generated_mac)
-    print("[+] Initiating MAC Address Change..")
+    print("[+] Initiating MAC Address change..")
     change_mac(options.interface, full_mac)
-    print("[+] Executed MAC Address Change")
+    print("[+] Executed MAC Address change")
     new_current_mac = detect_mac(options.interface)
     print("[+] Validating MAC Address..")
+    print("newcurrentmac: " + new_current_mac)
+    print("fullmac: " + full_mac)
     if new_current_mac == full_mac:
         print("[+] Validated MAC Address on " + options.interface + "!")
         print("[+] Old MAC Address: " + str(old_current_mac))
@@ -171,9 +173,9 @@ elif options.mac_change_type == "c" or options.mac_change_type == "C":
     valid_mac_check = re.findall(r"\w\w:\w\w:\w\w:\w\w:\w\w:\w\w"), str(options.newMAC)
     if valid_mac_check:
         old_current_mac = detect_mac(options.interface)
-        print("[+] Initiating MAC Address Change..")
+        print("[+] Initiating MAC Address change..")
         change_mac(options.interface, options.newmac)
-        print("[+] Executed MAC Address Change")
+        print("[+] Executed MAC Address change")
         new_current_mac = detect_mac(options.interface)
         print("[+] Validating MAC Address..")
         if new_current_mac == options.newMAC:
