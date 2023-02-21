@@ -77,7 +77,8 @@ def detect_mac (interface):
 options = get_arguments()
 if options.mac_change_type == "v" or options.mac_change_type == "V":
     print("[+] Loading Vendor MAC Addresses..")
-    text_file_juniper = open(os.getcwd("/Vendor_MAC_Files/Juniper.txt"))
+    cwd = os.getcwd()
+    text_file_juniper = open(str(cwd) + "/Vendor_MAC_Files/Juniper.txt")
     print(text_file_juniper)
 # 1. Import Various Vendor Models Text Files
 #       Using link: https://www.wireshark.org/tools/oui-lookup.html
