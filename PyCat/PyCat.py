@@ -71,7 +71,7 @@ class PyCat:
 
     def listen(self):
         self.socket.bind((self.args.target, self.args.port))
-        print("[+] Listening on " + self.args.target + ":" + self.args.port)
+        print("[+] Listening on " + str(self.args.target) + ":" + str(self.args.port))
         self.socket.listen(5)
         while True:
             client_socket, _ = self.socket.accept()
