@@ -136,5 +136,5 @@ else:
 
 
 pc = PyCat(args, buffer.encode())
-PyCat.run()
+pc.run()
 
