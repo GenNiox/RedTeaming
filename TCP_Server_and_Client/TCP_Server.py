@@ -6,6 +6,7 @@ Port = 5556
 
 def main():
     server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    server.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
     server.bind((IP, Port))
     server.listen(5)
     print(f"[*] Listening on {IP}:{Port}")
