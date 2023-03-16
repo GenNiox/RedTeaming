@@ -18,7 +18,7 @@ while True:
             print(message)
         else:
             message = sys.stdin.readline()
-            server.send(message)
+            server.send(bytes(message))
             sys.stdout.write("<You>")
             sys.stdout.write(message)
             sys.stdout.flush()
