@@ -7,9 +7,10 @@ client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
 client.connect((target_host, target_port))
 
-client.send(b"TEST-1-2-3-4!")
-
-response = client.recv(4096)
+while True:
+    message = byte(input(" #> "))
+    client.send(message)
+    response = client.recv(4096)
 
 print(response.decode())
 client.close()
