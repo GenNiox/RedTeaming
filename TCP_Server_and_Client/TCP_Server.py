@@ -14,7 +14,7 @@ list_of_members = []
 print(f"[*] Listening on {IP}:{Port}")
 
 def clientthread(conn, addr):
-    conn.send(b"Welcome to the chatroom!")
+    conn.send(bytes("Welcome to the chatroom!"))
     while True:
         try:
             message = sock.recv(1024)
