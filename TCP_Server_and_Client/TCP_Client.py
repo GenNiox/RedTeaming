@@ -12,7 +12,7 @@ while True:
     sockets_list = [sys.stdin, server]
     read_sockets,write_socket, error_socket = select.select(sockets_list,[],[])
 
-    for sockets in read_sockets:
+    for socks in read_sockets:
         if socks == server:
             message = socks.recv(2048)
             print(message)
