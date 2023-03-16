@@ -1,5 +1,5 @@
 """
-Written By: Tyler Burkhalter
+Written By: GenNiox
 Last Modified: 15-MAR-2023
 
 I am not responsible for any misuse of this program. This program is provided as-is with no warranty, guarantee, or
