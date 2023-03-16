@@ -1,28 +1,51 @@
 import socket
+import select
+import sys
 import threading
 
 IP = "0.0.0.0"
 Port = 5556
 
-def main():
-    server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    server.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
-    server.bind((IP, Port))
-    server.listen(5)
-    print(f"[*] Listening on {IP}:{Port}")
+server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+server.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+server.bind((IP, Port))
+server.listen(100)
+list_of_members = []
+print(f"[*] Listening on {IP}:{Port}")
 
+def clientthread(conn, addr):
+    conn.send("Welcome to the chatroom!")
     while True:
-        client, address = server.accept()
-        print(f"[+] Accepted connection from {address[0]}:{address[1]}")
-        client_handler = threading.Thread(target=handle_client, args=(client,))
-        client_handler.start()
+        try:
+            message = sock.recv(1024)
+            if message:
+                print("<" + addr[0] + "> " + message)
+                message_to_send = "<" + addr[0] + "> " + message
+                broadcast(message_to_send, conn)
+            else:
+                remove(conn)
+        except:
+            continue
 
-def handle_client(client_socket):
-    with client_socket as sock:
-        request = sock.recv(1024)
-        print(f'[+] Received: {request.decode("UTF-8")}')
-        sock.send(b"ACK")
+def broadcast(message, connection):
+    for member in list_of_members:
+        if clients != connection:
+            try:
+                clients.send(message)
+            except:
+                clients.close()
+                remove(clients)
+
+def remove(connection):
+    if connection in list_of_members:
+        list_of_members.remove(connection)
+
+while True:
+    conn, addr = server.accept()
+    list_of_members.append(conn)
+    print(addr[0] + " connected!")
+    start_new_thread(clientthread,(conn, addr))
 
 
-if __name__ == "__main__":
-    main()
+conn.close()
+server.close()

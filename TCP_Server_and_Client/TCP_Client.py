@@ -1,16 +1,25 @@
 import socket
+import select
+import sys
 
-target_host = "192.168.1.27"
+server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+IP = 192.168.1.27
 target_port = 5556
 
-client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-
-client.connect((target_host, target_port))
+server.connect((target_host, target_port))
 
 while True:
-    message = input(" #> ").encode()
-    client.send(message)
-    response = client.recv(4096)
+    sockets_list = [sys.stdin, server]
+    read_sockets,write_socket, error_socket = select.select(sockets_list,[],[])
 
-print(response.decode())
-client.close()
+    for sockets in read_sockets:
+        if socks == server:
+            message = socks.recv(2048)
+            print(message)
+        else:
+            message = sys.stdin.readline()
+            server.send(message)
+            sys.stdout.write("<You>")
+            sys.stdout.write(message)
+            sys.stdout.flush()
+server.close()
