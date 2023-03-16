@@ -14,13 +14,13 @@ list_of_members = []
 print(f"[*] Listening on {IP}:{Port}")
 
 def clientthread(conn, addr):
-    conn.send("Welcome to the chatroom!")
+    conn.send(b"Welcome to the chatroom!")
     while True:
         try:
             message = sock.recv(1024)
             if message:
                 print("<" + addr[0] + "> " + message)
-                message_to_send = "<" + addr[0] + "> " + message
+                message_to_send = bytes("<" + addr[0] + "> " + message)
                 broadcast(message_to_send, conn)
             else:
                 remove(conn)
