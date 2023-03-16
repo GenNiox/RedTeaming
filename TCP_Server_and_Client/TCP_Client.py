@@ -6,7 +6,7 @@ server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 IP = "192.168.1.27"
 target_port = 5556
 
-server.connect((target_host, target_port))
+server.connect((IP, target_port))
 
 while True:
     sockets_list = [sys.stdin, server]
