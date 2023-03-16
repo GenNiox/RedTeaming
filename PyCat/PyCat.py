@@ -123,7 +123,7 @@ parser.add_argument("-c", "--command", action="store_true", help="Execute Comman
 parser.add_argument("-e", "--execute", dest="execute", help="Execute specified command. See --help for more info.")
 parser.add_argument("-l", "--listen", action="store_true", help="Activate listener, see --help for more info.")
 parser.add_argument("-p", "--port", dest="port", type=int, default=5555, help="Specify port, see --help for more info.")
-parser.add_argument("-t", "--target", dest="target", default="192.168.1.108", help="Specify IP Address, see --help for more info.")
+parser.add_argument("-t", "--target", dest="target", default="0.0.0.0", help="Specify IP Address, see --help for more info.")
 parser.add_argument("-u", "--upload", dest="upload", help="Upload file, see --help for more info.")
 args = parser.parse_args()
 if args.listen:
