@@ -122,12 +122,12 @@ if __name__ == '__main__':
     echo 'ABC' | ./PyCat.py -t 192.168.1.108 -p 5555 # Echo text \"abc\" to target 192.168.1.108
     PyCat.py -t 192.168.1.108 -p 5555 # Connect to Server 192.168.1.108
     '''))
-parser.add_argument("-c", "--command", dest=command, action="store_true", help="Execute Command, see --help for more info.")
-parser.add_argument("-e", "--execute", dest=execute, help="Execute specified command. See --help for more info.")
-parser.add_argument("-l", "--listen", dest=listen, action="store_true", help="Activate listener, see --help for more info.")
-parser.add_argument("-p", "--port", dest=port, type=int, default=5555, help="Specify port, see --help for more info.")
-parser.add_argument("-t", "--target", dest=target, default="192.168.1.108", help="Specify IP Address, see --help for more info.")
-parser.add_argument("-u", "--upload", dest=upload, help="Upload file, see --help for more info.")
+parser.add_argument("-c", "--command", dest="command", action="store_true", help="Execute Command, see --help for more info.")
+parser.add_argument("-e", "--execute", dest="execute", help="Execute specified command. See --help for more info.")
+parser.add_argument("-l", "--listen", dest="listen", action="store_true", help="Activate listener, see --help for more info.")
+parser.add_argument("-p", "--port", dest="port", type=int, default=5555, help="Specify port, see --help for more info.")
+parser.add_argument("-t", "--target", dest="target", default="192.168.1.108", help="Specify IP Address, see --help for more info.")
+parser.add_argument("-u", "--upload", dest="upload", help="Upload file, see --help for more info.")
 args = parser.parse_args()
 if args.listen():
     buffer = ""
