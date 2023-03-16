@@ -44,7 +44,7 @@ while True:
     conn, addr = server.accept()
     list_of_members.append(conn)
     print(addr[0] + " connected!")
-    start_new_thread(clientthread,(conn, addr))
+    clientthread(conn, addr)
 
 
 conn.close()
