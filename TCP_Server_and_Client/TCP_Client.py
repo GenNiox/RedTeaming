@@ -8,7 +8,7 @@ client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 client.connect((target_host, target_port))
 
 while True:
-    message = byte(input(" #> "))
+    message = bytes(input(" #> "))
     client.send(message)
     response = client.recv(4096)
 
