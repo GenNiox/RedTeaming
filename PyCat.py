@@ -7,8 +7,8 @@ certainty of functionality. I am not responsible for any losses that may result 
 This script was written for my own educational benefit and use. You are permitted to reuse, copy, and utilize my script.
 This script was created with the help from the author of "Black Hat Python (2nd Edition)."
 
-                          |
-                         /\
+                         |
+                         ^
 Hack on, brothers!     \/G\/
                        / V \
 """
