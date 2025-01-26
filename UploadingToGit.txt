@@ -1,32 +1,41 @@
 INITIAL REPO CREATION:
-1a. Enter the RedTeaming directory
-1b. "git remote set-url origin git@github.com/GenNiox/RedTeaming.git"
-2a. Enter the directory that you wish to add the SSH key to.
-2b. "ssh-keygen -t CERTTYPE -C "E-mailAddress@address.com"
-3. To test: "ssh -vT git@github.com" -i /path/to/SSHKey.pub
+1. Make the RedTeaming directory.
+	a. "cd /path/to/parent/folder"
+	b. "mkdir RedTeaming"
+2. Enter the RedTeaming directory and establish an initial link.
+	a. "cd RedTeaming"
+	b. "git remote set-url origin git@github.com/GenNiox/RedTeaming.git"
+3. Enter the directory that you wish to add the SSH key to.
+	a. i.e. "cd /home/user/.ssh/"
+	b. "ssh-keygen -t $CERTTYPE -C "E-mailAddress@address.com"
+3. To test: "ssh -vT git@github.com" -i /homne/user/.ssh/SSHKey.pub
 
 
-SYNCING WITH GIT:
+CLONING WITH GIT:
 1. Enter the directory that you wish to git clone from.
 2. Generate the key.
-	"ssh-keygen -C "email@address.com" (Needs to match an auth'ed acct. on GitHub)
+	a. "ssh-keygen -C "email@address.com" (Needs to match an auth'ed acct. on GitHub)
 3. Add the SSH Key to the local repo:
-	"ssh-add /path/to/SSHKey.Private"
+	a. "ssh-add /path/to/SSHKey.Private"
 4. Upload the key to GitHub
-	Top-Right of Page --> Settings --> "Access" Section --> "SSH and GPG keys" page
-	Click "New SSH key"
-	Give it a name, then paste-in the public key from /path/to/SSHKey.pub --> Save
+	a. Top-Right of Page --> Settings --> "Access" Section --> "SSH and GPG keys" page
+	b. Click "New SSH key"
+	c. Give it a name, then paste-in the public key from /path/to/SSHKey.pub --> Save
 5. Clone from Git.
-	"git@github.com:GenNiox/RedTeaming.git"
-
+	a. "git@github.com:GenNiox/RedTeaming.git"
 
 PUSHING TO GIT:
 1. Ensure the "SYNCING WITH GIT" section is completed first.
-2. git push
-	If needed, can reset the SSH Key for uploading:
-		"git commit --amend --reset-author -m "Reset SSH Key""
-WIPING KEYS:
-1. Delete the old keys.
+2. Add all files needed to get sync'ed with GitHub.
+	a. "git add /path/to/file"
+3. Commit the changes locally.
+	a. "git commit -m "Insert Commit Message Here"
+4. Push the changes to GitHub.
+	a. "git push"
+		i. If needed, can reset the SSH Key for uploading:
+			a."git commit --amend --reset-author -m "Reset SSH Key""
+WIPED/EXPIRED KEYS:
+1. Delete the old keys from both the local SSH directory and GitHub.
 2. Re-create the keys using the "SYNCING WITH GIT" section.
-3. 
+3. *MAY* Have to reset the SSH Key needed for Uploading (See "PUSHING TO GIT" 4-a-i-a)
 
