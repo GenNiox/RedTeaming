@@ -1,0 +1,9 @@
+FlameShot (Screenshotting Tool):
+sudo apt install flameshot
+
+PWNCat (Beefed-Up NCat/C2 Tool):
+Source: https://github.com/calebstewart/pwncat
+
+XClip (Clipboard binary):
+sudo apt install xclip
+

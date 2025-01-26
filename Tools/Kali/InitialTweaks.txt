@@ -1,0 +1,12 @@
+Flameshot:
+	Make Flameshot the Default Screenshot Tool
+		1. Click the Kali "Start Menu" --> "Keyboard"
+		2. Click the "Application Shortcuts" Tab
+		3. Locate the command "xfce4-screenshooter" associated to "Print"
+			a. Select it --> Click the "--- Remove" Button
+			b. Click the "+ Add" Button
+			c. In the "Command:" box, enter-in: "/usr/bin/flameshot gui"
+			d. Click "OK"
+			e. In the "Command Shortcut" window, press the "Print Screen" button
+		---FIN---
+
