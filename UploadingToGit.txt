@@ -12,10 +12,21 @@ SYNCING WITH GIT:
 	"ssh-keygen -C "email@address.com" (Needs to match an auth'ed acct. on GitHub)
 3. Add the SSH Key to the local repo:
 	"ssh-add /path/to/SSHKey.Private"
-4. Clone from Git.
+4. Upload the key to GitHub
+	Top-Right of Page --> Settings --> "Access" Section --> "SSH and GPG keys" page
+	Click "New SSH key"
+	Give it a name, then paste-in the public key from /path/to/SSHKey.pub --> Save
+5. Clone from Git.
 	"git@github.com:GenNiox/RedTeaming.git"
 
 
 PUSHING TO GIT:
 1. Ensure the "SYNCING WITH GIT" section is completed first.
 2. git push
+	If needed, can reset the SSH Key for uploading:
+		"git commit --amend --reset-author -m "Reset SSH Key""
+WIPING KEYS:
+1. Delete the old keys.
+2. Re-create the keys using the "SYNCING WITH GIT" section.
+3. 
+
