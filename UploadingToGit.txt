@@ -1,3 +1,9 @@
+Helpful Links:
+https://github.com/settings/keys
+https://docs.github.com/en/authentication
+https://www.youtube.com/watch?v=snCP3c7wXw0
+
+
 INITIAL REPO CREATION:
 1. Make the RedTeaming directory.
 	a. "cd /path/to/parent/folder"
