@@ -2,6 +2,7 @@ Helpful Links:
 https://github.com/settings/keys
 https://docs.github.com/en/authentication
 https://www.youtube.com/watch?v=snCP3c7wXw0
+https://stackoverflow.com/questions/25464930/how-can-i-remove-an-ssh-key
 
 
 INITIAL REPO CREATION:
@@ -41,7 +42,10 @@ PUSHING TO GIT:
 		i. If needed, can reset the SSH Key for uploading:
 			a."git commit --amend --reset-author -m "Reset SSH Key""
 WIPED/EXPIRED KEYS:
-1. Delete the old keys from both the local SSH directory and GitHub.
+1. Disassociate and then delete the old keys from both the local SSH directory and GitHub.
+	a. "eval $(ssh-agent -s)"
+	b. i.e. "ssh-add -d /home/user/.ssh/SSHKey.pub"
+	c. i.e. "rm -f /home/user/.ssh/SSHKey*" (Deleting both the .pub and the associated private key!))
 2. Re-create the keys using the "SYNCING WITH GIT" section.
 3. *MAY* Have to reset the SSH Key needed for Uploading (See "PUSHING TO GIT" 4-a-i-a)
 
