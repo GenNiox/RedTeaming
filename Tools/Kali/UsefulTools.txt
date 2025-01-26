@@ -1,3 +1,11 @@
+FCrackZip (.zip Cracker):
+sudo apt install fcrackzip
+Usage: fcrackzip -v -u -D -p /usr/share/wordlists/rockyou.txt nameof.zip
+v --> Verbose
+u --> Unzipping
+-D --> Dictionary Attack
+-p --> Using Word List
+
 FlameShot (Screenshotting Tool):
 sudo apt install flameshot
 
