@@ -3,7 +3,8 @@ https://github.com/settings/keys
 https://docs.github.com/en/authentication
 https://www.youtube.com/watch?v=snCP3c7wXw0
 https://stackoverflow.com/questions/25464930/how-can-i-remove-an-ssh-key
-
+https://docs.github.com/en/authentication/managing-commit-signature-verification/generating-a-new-gpg-key
+https://docs.github.com/en/authentication/managing-commit-signature-verification/telling-git-about-your-signing-key
 
 
 INITIAL REPO CREATION:
@@ -31,6 +32,31 @@ CLONING WITH GIT:
 	c. Give it a name, then paste-in the public key from /path/to/SSHKey.pub --> Save
 5. Clone from Git.
 	a. "git@github.com:GenNiox/RedTeaming.git"
+
+ADDING GPG KEYS:
+1. Create a GPG key pair.
+	a. "gpg --full-generate-key"
+2. List-Out the GPG key pair.
+	a. "gpg --list-secret-keys --keyid-format=long"
+3. Copy the long form of the ID (This'll be above the E-mail address and after the "4096R")
+4. Export the GPG Public key.
+	a. gpg --armor --export $LongFormFromStep3
+5. Copy the GPG key, beginning with "-----BEGIN PGP PUBLIC KEY BLOCK-----" and ending with "-----END PGP PUBLIC KEY BLOCK-----"
+6. Add this key to the GitHub account.
+7. Add the GPG key to Git.
+	a. "git config --global user.signingkey $LongFormFromStep3"
+8. Configure Git to sign all commits and tags by default.
+	a. "git config --global commit.gpgsign true"
+	b. "git config --global tag.gpgSign true"
+
+USING THE SSH KEY TO SIGN:
+You can use the SSH key used for authentication for signature as well!
+(NOTE: If you've already generated a GPG Key and associated it, this is no longer needed!)
+1. Configure Git to use SSH to sign commits and tags.
+	a. "git config --global gpg.format ssh"
+2. Set the signing key for Git.
+	a. i.e. "git config --global user.signingkey /home/user/.ssh/SSHKey.pub"
+
 
 PUSHING TO GIT:
 1. Ensure the "SYNCING WITH GIT" section is completed first.
