@@ -1,5 +1,0 @@
-Source #1: https://nmap.org/ncat/
-Source #2: https://secwiki.org/w/Nmap/Ncat_Portable
-Source #3: https://github.com/int0x33/nc.exe/
-
-
