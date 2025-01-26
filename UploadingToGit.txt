@@ -1,3 +1,21 @@
-1. "git remote set-url origin git@github.com/GenNiox/RedTeaming.git"
-2. "ssh-keygen -t CERTTYPE -C "E-mailAddress@address.com"
-3. "ssh -vT git@github.com"
+INITIAL REPO CREATION:
+1a. Enter the RedTeaming directory
+1b. "git remote set-url origin git@github.com/GenNiox/RedTeaming.git"
+2a. Enter the directory that you wish to add the SSH key to.
+2b. "ssh-keygen -t CERTTYPE -C "E-mailAddress@address.com"
+3. To test: "ssh -vT git@github.com" -i /path/to/SSHKey.pub
+
+
+SYNCING WITH GIT:
+1. Enter the directory that you wish to git clone from.
+2. Generate the key.
+	"ssh-keygen -C "email@address.com" (Needs to match an auth'ed acct. on GitHub)
+3. Add the SSH Key to the local repo:
+	"ssh-add /path/to/SSHKey.Private"
+4. Clone from Git.
+	"git@github.com:GenNiox/RedTeaming.git"
+
+
+PUSHING TO GIT:
+1. Ensure the "SYNCING WITH GIT" section is completed first.
+2. git push
