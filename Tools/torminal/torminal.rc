@@ -1,0 +1,48 @@
+TOR_LISTENADDRESS="127.0.0.1"
+TOR_LISTENPORT="9050"
+TOR_SOCKSFILE=/etc/tor/torsocks.conf
+COLOR_IPCHECK='\e[5;33m'
+COLOR_PURPLE='\e[1;35m'
+COLOR_RESET='\e[0m'
+
+#If the Tor binary exists
+if ! command -v tor >/dev/null 2>&1; then
+	echo -e '\e[1;31m' [-] TOR IS '\e[5;31m'NOT INSTALLED'\e[0m''\e[1;31m'!
+	exit 0
+fi
+
+#If the Tor service is active
+if ! systemctl is-active --quiet tor; then
+	echo -e '\e[1;31m' [*] TOR IS NOT STARTED!
+	exit 0
+fi
+
+#If the TorAddress and TorPort are both configured
+if ! ( grep -q "TorAddress $TOR_LISTENADDRESS" $TOR_SOCKSFILE) && (grep -q "TorPort $TOR_LISTENPORT"); then 
+        echo -e '\e[1;33m' [*] INCORRECT $TOR_SOCKSFILE CONFIGURATION!
+	exit 0
+fi
+
+#Listening port check
+if ! ss -tulpn 2>/dev/null | grep -q "${TOR_LISTENADDRESS}:${TOR_LISTENPORT}"; then
+	echo -e '\e[1;33m'" [*] ${TOR_LISTENADDRESS}:${TOR_LISTENPORT} IS NOT TOR'S LISTEN PORT!"
+fi
+
+echo -e ${COLOR_PURPLE}
+echo -e =========================
+echo "  WELCOME TO TOR-MINAL "
+echo -e =========================
+echo -e ${COLOR_RESET}
+
+# Run default variables
+if [ -f ~/.bashrc ]; then
+	. ~/.bashrc
+fi
+
+# Prompt-changing Check
+if [ "$USER" = "root" ]; then
+	export PS1="\[\e[1;35m\][++--TOR--++] \[\e[5;31m\]\u\[\e[0m\]\[\e[1;35m\]@\h:\[\e[1;35m\]\w\[\e[1;35m\]# \[\e[0m\]"
+else
+	export PS1="\[\e[1;35m\][++--TOR--++] \u@\h\[\e[0m\]:\[\e[1;35m\]\w$ \[\e[0m\]"
+fi
+#echo -e '\e[1;32m' External IP Address: ${COLOR_IPCHECK}$(curl ifconfig.me -s)${COLOR_RESET}
