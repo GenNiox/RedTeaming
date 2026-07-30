@@ -2,6 +2,7 @@ Requirements:
   [ ] Configure /etc/proxychains4.conf
       [ ] Comment-out "strict_chain"
       [ ] Enable "dynamic_chain"
+      [ ] Validate that "proxy_dns" is enabled so you don't leak your IP address via DNS requests!
       [ ] sudo systemctl restart proxychains
   [ ] Install tor and enable it
       [ ] sudo apt install tor -y
