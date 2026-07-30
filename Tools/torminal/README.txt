@@ -4,6 +4,8 @@ Requirements:
       [ ] Enable "dynamic_chain"
       [ ] Validate that "proxy_dns" is enabled so you don't leak your IP address via DNS requests!
       [ ] sudo systemctl restart proxychains
+      [ ] ..and of course, add the SOCKS5 proxy
+          [ ] socks5 127.0.0.1 9050
   [ ] Install tor and enable it
       [ ] sudo apt install tor -y
       [ ] sudo systemctl start tor
