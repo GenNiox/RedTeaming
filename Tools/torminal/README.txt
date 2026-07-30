@@ -14,9 +14,9 @@ Requirements:
 
 To Install:
   [ ] sudo mkdir /opt/torminal
-  [ ] Copy files into /opt/torminal
-  [ ] sudo chown root:root /opt/torminal
-  [ ] sudo chmod +x /opt/torminal
+  [ ] Copy files into /opt/torminal/
+  [ ] sudo chown root:root /opt/torminal/torminal.sh
+  [ ] sudo chmod +x /opt/torminal/torminal.sh
   [ ] sudo ln -s /opt/torminal/torminal.sh /usr/bin/torminal
   [ ] You can just type-in "torminal" at this point and it'll take over from there.
 
